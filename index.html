@@ -1,0 +1,118 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML5 APIs - Master</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/foundation.css" />
+    <link rel="stylesheet" href="css/overrides.css">
+    <script src="js/vendor/modernizr.js"></script>
+  </head>
+  <body>
+    <!-- map modal -->
+
+    <!-- top nav -> not functional yet -->
+     <header class="topNav">
+      <nav>
+        <img src="images/logo-s.png" alt="mini logo" class="left">
+        <ul class="no-bullet inline-list">
+          <li>MODELS<img class="right chevron" src="images/down-arrow.png"></li>
+          <li>SHOPPING TOOLS<img class="right chevron" src="images/down-arrow.png"></li>
+          <li>DISCOVER<img class="right chevron" src="images/down-arrow.png"></li>
+          <li>OWNERS<img class="right chevron" src="images/down-arrow.png"></li>
+        </ul>
+        <div class="global-nav-item right findDealer"><i class="fa fa-map-marker"></i>find a dealer</div>
+      </nav>
+    </header>
+  
+    <!-- large images / models -->
+    <div class="row hide">
+      <div class="small-12 columns">
+        <div class="mainContainer">
+          <!-- added this div called cars for the roundabout -->
+          <div id="cars">
+            <img class="F55" src="images/F55-en.png" alt="blue mini">
+            <img src="images/F56-en.png" alt="yellow mini" class="F56">
+            <img src="images/R57-en.png" alt="convertible mini" class="R58">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- thumbnail images -->
+    <div class="row car-thumbs">
+      <div class="small-6 columns">
+        <h4 class="subhead">SELECT YOUR MODEL :<span>&nbsp;</span></h4>
+        <div class="thumbInfo">
+          <img src="images/F55.jpg" alt="blue mini" id="F55" data-roundaboutindex="0">
+          <img src="images/F56.jpg" alt="yellow mini" id="F56" data-roundaboutindex="1">
+          <img src="images/R57.jpg" alt="convertible mini" id="R58" data-roundaboutindex="2">
+        </div>
+        <hr>
+        <!-- social media icons / save to localstorage -->
+        <div class="socialIcons">
+          <span class="right"><i class="fa fa-refresh"></i></span>
+          <ul class="inline-list">
+            <li><i class="fa fa-download"></i>Save selection</li>
+            <li><i class="fa fa-facebook-official" data-tooltip aria-haspopup="true" class="has-tip" title="Post this"></i></li>
+            <li><i class="fa fa-pinterest-p" data-tooltip aria-haspopup="true" class="has-tip" title="pin this"></i></li>
+            <li><i class="fa fa-thumbs-up" data-tooltip aria-haspopup="true" class="has-tip" title="Like this"></i></li>
+            <li><i class="fa fa-twitter" data-tooltip aria-haspopup="true" class="has-tip" title="Tweet this"></i></li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- model info block  -->
+      <div class="small-6 columns modelInfo">         
+          <h4 class="modelName">Model Name Here</h4>
+          <p class="priceInfo">Pricing here</p>
+          <p class="modelDetails">Model details here</p>          
+      </div>
+    </div> <!-- end model info / thumbs -->
+    <hr>
+    
+
+    <div class="row"><!-- geolocation stuff / mapping -->
+      <div class="small-6 columns">
+        <div id="map-canvas"></div>
+        <i class="fa fa-expand left">&nbsp;Click to expand map</i>
+      </div>
+      
+      <div class="small-6 columns">
+        <div>
+          <h4>Find a dealer close to you!</h4>
+          <div class="row searchButtons">
+            <div class="small-6 columns">
+              <button id="findAtCurrent">Find Dealer</button>
+            </div>
+            <div class="small-6 columns">
+              <button id="directionsButton">Get Directions</button>
+            </div>
+            <div class="small-8 columns">
+              <input id="changeLoc" type="text" placeholder="change your location ie Toronto, Ontario">
+            </div>
+            <div class="small-4 columns">
+              <button class="doGeo">Go!</button>
+            </div>
+          </div>
+        </div>
+      </div>      
+    </div>
+    
+    <hr>
+
+    <div class="row"><!-- footer div -->
+      <footer class="small-12 columns">
+        footer info here
+      </footer>      
+    </div>
+    <script src="js/vendor/jquery.js"></script>    
+    <script src="js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+    
+    <script src="js/master.js"></script>
+  </body>
+</html>
