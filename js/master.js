@@ -1,6 +1,20 @@
 (function(){
+
+	var selectedCar, saveButton = document.querySelector('.fa-download').parentNode; //ParentNode is the element's wrapper, whatever it is nested within
+	var name = document.querySelector('.modelName'), 
+		price = document.querySelector('.priceInfo'), 
+		deets = document.querySelector('.modelDetails');
+
 	//expanded AJAX example. Ajax isn't its own language, just a method of using PHP. 
 	$('.thumbInfo img').on('click', function(){
+
+		if(window.localStorage.getItem('savedCar')){
+			var data = window.localStorage.getItem('savedCar', selectedCar);
+
+			data = JSON.parse(data);
+			renderCarInfo(data);
+		}
+
 		//DO an AJAZ call:
 		$.ajax({
 			url: "includes/ajaxQuery.php", //Choosing what PHP file to target (and subsequently, what database)
@@ -9,9 +23,11 @@
 		})//Putting a semicolon here will break it! This is so we can chain together methods.
 
 		.done(function(data){
-			console.log(data);
+			//console.log(data);
 
-			if(data){
+			if(data && data != "null"){ //Will not move forward if the object is Null
+				selectedCar = data;
+
 				data = JSON.parse(data); //Using JSON to take the data retrieved, and parsing it into an object
 				renderCarInfo(data); //Calling to the function that will write out the object
 			}else{
@@ -24,14 +40,31 @@
 			console.dir(ajaxCall); //Outputs the ajax call as an object.
 		});//terminate the ajax function
 
-		function renderCarInfo(car){ //Taking the JSON object and writing it out into the HTML pertaining to the specified classes
-			$('thumbInfo img').addClass('nonActive');
-			$('#'+car.model).removeClass('nonActive');
-
-			$('.subhead span').text(" mini cooper "+car.model);
-			$('.modelName').text(car.modelName);
-			$('.priceInfo').text(car.pricing);
-			$('.modelDetails').text(car.modelDetails);
-		}
 	});
+
+	function renderCarInfo(car){ //Taking the JSON object and writing it out into the HTML pertaining to the specified classes
+		$('thumbInfo img').addClass('nonActive');
+		$('#'+car.model).removeClass('nonActive');
+
+		$('.subhead span').text(" mini cooper "+car.model);
+		$('.modelName').text(car.modelName);
+		$('.priceInfo').text(car.pricing);
+		$('.modelDetails').text(car.modelDetails);
+	}
+
+	function saveData()
+	{
+		console.log("Clicked!")
+		//debugger;
+		if(window.localStorage){
+			window.localStorage.setItem('savedCar', selectedCar);
+		}
+
+		//localStorage.setItem('carname', name.innerHTML);
+		//localStorage.setItem('carprice', price.innerHTML);
+		//localStorage.setItem('cardeets', deets.innerHTML);
+	}
+
+	saveButton.addEventListener('click', saveData, false);
+	//loadInfo();
 })();
