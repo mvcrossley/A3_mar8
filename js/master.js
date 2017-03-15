@@ -4,16 +4,16 @@
 	var name = document.querySelector('.modelName'), 
 		price = document.querySelector('.priceInfo'), 
 		deets = document.querySelector('.modelDetails');
-
+		
+	function loadStuff(){
+			if(window.localStorage.getItem('savedCar')){
+				var data = window.localStorage.getItem('savedCar', selectedCar);
+				data = JSON.parse(data);
+				renderCarInfo(data);
+			}
+		}
 	//expanded AJAX example. Ajax isn't its own language, just a method of using PHP. 
 	$('.thumbInfo img').on('click', function(){
-
-		if(window.localStorage.getItem('savedCar')){
-			var data = window.localStorage.getItem('savedCar', selectedCar);
-
-			data = JSON.parse(data);
-			renderCarInfo(data);
-		}
 
 		//DO an AJAZ call:
 		$.ajax({
@@ -42,7 +42,14 @@
 
 	});
 
+	
+
 	function renderCarInfo(car){ //Taking the JSON object and writing it out into the HTML pertaining to the specified classes
+		var currentThumb = $('#'+car.model);
+
+		var animIndex = parseInt(currentThumb.data('roundaboutindex'), 8);
+		$('#cars').roundabout('animateToChild', animIndex);
+
 		$('thumbInfo img').addClass('nonActive');
 		$('#'+car.model).removeClass('nonActive');
 
@@ -66,5 +73,26 @@
 	}
 
 	saveButton.addEventListener('click', saveData, false);
-	//loadInfo();
+
+	//----------------------------------------------------------------------------------------------JQUERY BELOW
+
+	$(window).load(function(){ //Checking to see if the window is done loading. (All the content, not just the skelly)
+		//Set up the roundabout container
+		$('#cars').roundabout({
+			childSelector: 'img',
+			minOpacity: 0.8,
+			minScale: 0.4,
+			duration: 1200 //just over 1 sec
+		});
+
+		$('#cars').css('opacity', 1); //Instead of adding a class, just pass in a css property that you want to change
+
+		loadStuff();
+
+	}); 
+
+
+
+
+
 })();
